@@ -9,11 +9,11 @@ enum nodeType { OR, XOR, AND, LEAF };
 using namespace std;
 int main()
 {
-	// string pch = strtok ("asdfasdfdsaf asdf - fa- afs/+ asdf"," ,.-");
-	// while (pch != "")
-	// {
-	//     cout << pch << endl;
-	// 	pch = strtok (NULL, " ,.-");
-	// }
+	string pch = strtok ("asdfasdfdsaf asdf - fa- afs/+ asdf"," ,.-");
+	while (pch != "")
+	{
+	    cout << pch << endl;
+		pch = strtok (NULL, " ,.-");
+	}
 	
 }
