@@ -1,0 +1,6 @@
+string pch = strtok (featureModelLine," ,.-");
+while (pch != "")
+{
+    cout << pch << endl;
+	pch = strtok (NULL, " ,.-");
+}
