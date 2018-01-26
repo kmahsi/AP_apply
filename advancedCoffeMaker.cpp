@@ -9,11 +9,13 @@ using namespace std;
 void AdvancedCoffeMaker::getInput()
 {
 	string featureModelLine, descriptionLine ;
+	list<string> features;
 	getline(cin, featureModelLine);
+	featureModelLine.erase(remove_if(featureModelLine.begin(), featureModelLine.end(), ::isspace), featureModelLine.end());
+	featureGraph->setRoot(featureModelLine.substr(0, featureModelLine.find("=")));
 	while (featureModelLine != "#")
 	{
 						//erase all whitespaces in the input
-		featureModelLine.erase(remove_if(featureModelLine.begin(), featureModelLine.end(), ::isspace), featureModelLine.end());
 		string superFeature = featureModelLine.substr(0, featureModelLine.find("="));
 		string subFeatures = featureModelLine.substr(featureModelLine.find("=") + 1);
 
@@ -22,15 +24,17 @@ void AdvancedCoffeMaker::getInput()
 		addEdges(superFeature, subFeatures);
 
 		getline(cin, featureModelLine);
+		featureModelLine.erase(remove_if(featureModelLine.begin(), featureModelLine.end(), ::isspace), featureModelLine.end());
 	}
 	getline(cin, descriptionLine);
 	while(descriptionLine != "##")
 	{
 		descriptionLine.erase(remove_if(descriptionLine.begin(), descriptionLine.end(), ::isspace), descriptionLine.end());
-		// list<string> features = getFeatures(descriptionLine);
+		features = getFeatures(descriptionLine);
 		getline(cin, descriptionLine);
 	}
 
+	featureGraph->checkCoffeeBFS(features);
 
 }
 
@@ -66,15 +70,15 @@ bool AdvancedCoffeMaker::addEdges(string superFeature, string subFeatures)
 
 }
 
-// list<string> AdvancedCoffeMaker::getFeatures(string descriptionLine)
-// {
-// 	list<string> features;
-// 	descriptionLine = descriptionLine.substr(1, descriptionLine.length() -2);
-// 	while( descriptionLine.find(",") != string::npos)		
-// 	{
-// 		features.push_back(subFeatures.substr(0, subFeatures.find(",")));
-// 		descriptionLine = subFeatures.substr(subFeatures.find(",") + 1);
-// 	}
-// 	features.push_back(descriptionLine);
-// 	return features;
-// }
+list<string> AdvancedCoffeMaker::getFeatures(string descriptionLine)
+{
+	list<string> features;
+	descriptionLine = descriptionLine.substr(1, descriptionLine.length() -2);
+	while( descriptionLine.find(",") != string::npos)		
+	{
+		features.push_back(descriptionLine.substr(0, descriptionLine.find(",")));
+		descriptionLine = descriptionLine.substr(descriptionLine.find(",") + 1);
+	}
+	features.push_back(descriptionLine);
+	return features;
+}

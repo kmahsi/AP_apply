@@ -7,6 +7,11 @@
 
 
 // define # and ## instead of using it inside code.
+// fix makefile complier / options
+// make constructors if you can
+// user ifndefine for #( compiler language )
+// rename check coffee bfs!
+// save number of vertices in graph(you should wright constructor i think)
 
 using namespace std;
 string s = "gholi";

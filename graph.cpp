@@ -44,5 +44,34 @@ Node* Graph::getNode(string nodeName)
 
 void Graph::emptyGraph()
 {
-	
+	std::unordered_map <std::string, Node*>::iterator nodesIterator = nodes.begin();
+	while(nodesIterator != nodes.end())
+	{
+		delete (nodesIterator++)->second;
+	}
+	nodes.clear();
+	std::unordered_map < std::string, std::vector <std::string>* >::iterator adjListIterator = adjList.begin();
+	while(adjListIterator != adjList.end())
+	{
+		delete (nodesIterator++)->second;
+	}
+	adjList.clear();
+}
+
+bool Graph::checkCoffeeBFS(list<string> features)
+{
+	std::unordered_map <std::string, Node*>::iterator nodesIterator = nodes.begin();
+	unordered_map <std::string, bool> visited;
+	while(nodesIterator != nodes.end())
+	{
+        visited[(nodesIterator++)->first] = false;
+	}
+	list<string> queue;
+	visited[root] = true;
+	queue.push_back(root);
+}
+
+void Graph::setRoot(string _root)
+{
+	root = _root;
 }

@@ -1,12 +1,12 @@
 
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 #include<algorithm>
 // #include <stdio.h>
 #include<list>
-#include <string.h>
+#include <string>
 // #include <vector>
-
+#include <unordered_map>
 enum nodeType { OR, XOR, AND, LEAF };
 
 using namespace std;
@@ -29,11 +29,23 @@ int main()
 	// }
 	// cout << s;
 	
-	int * a = new int;
-	*a = 3;
-	cout << *a << endl;
+	// int * a = new int;
+	// *a = 3;
+	// cout << *a << endl;
+	// delete a;
+	// cout << *a << endl;
+	// unordered_map< int, string > a;
+	// a[0] = "3";
+	// a[1] = "6";
+	// unordered_map< int, string >::iterator it = a.begin();
+	// while(it != a.end())
+	// {
+	// 	cout << it->first << "  " << it->second << endl;
+	// 	it++;
+	// }
+	vector<string> *a = new std::vector<string>;
+	a->push_back("G");
 	delete a;
-	cout << *a << endl;
 	// std::vector<char> *v;
 	
-}
+};
