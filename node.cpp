@@ -1,8 +1,9 @@
+
 #include "node.h"
 
 using namespace std;
 
-Node::Node(std::string _name, nodeType _type = LEAF, bool _mandatory = false)
+Node::Node(std::string _name, nodeType _type , bool _mandatory)
 {
 	name = _name;
 	type = _type;

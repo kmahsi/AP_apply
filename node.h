@@ -1,11 +1,12 @@
+
 #include<iostream>
 
-enum nodeType { OR, XOR, AND, LEAF };
+enum nodeType { OR, XOR, PLUS, LEAF };
 
 class Node
 {
 public:
-	Node(std::string _name, nodeType _type, bool _mandatory);
+	Node(std::string _name, nodeType _type = LEAF, bool _mandatory = false);
 	std::string getName();
 	nodeType getType();
 	bool getMandatory();

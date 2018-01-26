@@ -1,28 +1,28 @@
-#include<iostream>
-#include <list>
 
-#include "AdvancedCoffeMaker.h"
+#include <iostream>
+#include <list>
+#include <map>
+#include "advancedCoffeMaker.h"
 
 
 using namespace std;
 
-bool test(int a= 3, int b = 4, int c = 5)
-{
-	cout << a + b + c;
-}
 
 int main()
 {
 	
-	list<string>::iterator i;
 	AdvancedCoffeMaker AMC;
-	AMC.getInput();
-	list<string> x;
-	x.push_back("fi");
-	x.push_back("fiasdfa");
-	i = x.begin();
-
-	cout << *(++i);
+	// AMC.getInput();
+	std::map<std::string, int> nodes;
+	nodes["Ghasem"] = 3;
+	cout << nodes["Ghasem"] << endl;
+	cout << nodes["mahid"] << endl;
 	cout << "a\n";
-	test();
+	
 }
+
+
+// int main()
+// {
+// 	cout << "Hi";	
+// }
