@@ -41,3 +41,8 @@ Node* Graph::getNode(string nodeName)
 {
 	return nodes[nodeName];
 }
+
+void Graph::emptyGraph()
+{
+	
+}

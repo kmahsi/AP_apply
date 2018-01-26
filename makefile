@@ -1,10 +1,9 @@
-
 compile = g++ -std=c++11
 
 all: main.o advancedCoffeMaker.o graph.o node.o
 	$(compile) -o a.out main.o advancedCoffeMaker.o graph.o node.o
 	rm *.o
-	./a.out
+	# ./a.out
 
 main.o : advancedCoffeMaker.h main.cpp graph.h node.h
 	$(compile) -c main.cpp

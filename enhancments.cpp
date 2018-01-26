@@ -1,8 +1,9 @@
 
 #include<iostream>
 #include<string>
-// #include<algorithm>
+#include<algorithm>
 // #include <stdio.h>
+#include<list>
 #include <string.h>
 // #include <vector>
 
@@ -18,17 +19,21 @@ int main()
 	//     cout << pch << endl;
 	// 	pch = strtok (NULL, " ,.-");
 	// }
-	string s = "HI+kami+I'm+Here+Baby";
-	do
-	{
-		string adjNode = s.substr(0, s.find("+"));
-		cout << adjNode << "   " << s << "          " << s.find("+") << "     " << s.length() <<endl;
-		s = s.substr(s.find("+") + 1);
-	}while(s.find("+") != string::npos);
+	// string s = "HI+kami+I'm+Here+Baby";
+	// int n = 5;
+	// while ( s.find("+") != string::npos )
+	// {
+	// 	string adjNode = s.substr(0, s.find("+"));
+	// 	cout << adjNode << "   " << s << "          " << s.find("+") << "     " << s.length() <<endl;
+	// 	s = s.substr(s.find("+") + 1);
+	// }
 	// cout << s;
 	
-	// list<
-
+	int * a = new int;
+	*a = 3;
+	cout << *a << endl;
+	delete a;
+	cout << *a << endl;
 	// std::vector<char> *v;
 	
 }

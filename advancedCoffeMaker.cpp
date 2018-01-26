@@ -1,9 +1,10 @@
 #include "advancedCoffeMaker.h"
-#include<iostream>
-#include<algorithm>
-using namespace std;
+#include <iostream>
+#include <algorithm>
 #include <stdio.h>
-#include <string.h>
+#include <list>
+
+using namespace std;
 
 void AdvancedCoffeMaker::getInput()
 {
@@ -18,15 +19,15 @@ void AdvancedCoffeMaker::getInput()
 
 		featureGraph->addNode(superFeature);
 		featureGraph->setType(superFeature, findNodeType(subFeatures));
-		addEdge(superFeature, subFeatures);
-		
+		addEdges(superFeature, subFeatures);
 
 		getline(cin, featureModelLine);
 	}
 	getline(cin, descriptionLine);
 	while(descriptionLine != "##")
 	{
-
+		descriptionLine.erase(remove_if(descriptionLine.begin(), descriptionLine.end(), ::isspace), descriptionLine.end());
+		// list<string> features = getFeatures(descriptionLine);
 		getline(cin, descriptionLine);
 	}
 
@@ -44,23 +45,36 @@ nodeType AdvancedCoffeMaker::findNodeType( string subFeatures )
 	else return LEAF;
 }
 
-bool AdvancedCoffeMaker::addEdge(string superFeature, string subFeatures)
+bool AdvancedCoffeMaker::addEdges(string superFeature, string subFeatures)
 {
 	string adjNode;
 
 	while( subFeatures.find("+") != string::npos)		
 	{
 		adjNode = subFeatures.substr(0, subFeatures.find("+"));
-		bool mandatory = ( adjNode[0] == "?" ) ?  true : false;
-		adjNode = ( adjNode[0] == "?" ) ? adjNode.substr(1) : adjNode;
+		bool mandatory = ( adjNode[0] == '?' ) ?  true : false;
+		adjNode = ( adjNode[0] == '?' ) ? adjNode.substr(1) : adjNode;
 		featureGraph->addNode(adjNode);
-		featureGraph->setMandatory(mandatory);
+		featureGraph->setMandatory(adjNode, mandatory);
 		subFeatures = subFeatures.substr(subFeatures.find("+") + 1);
 	}
 	adjNode = subFeatures;
-	bool mandatory = ( adjNode[0] == "?" ) ?  true : false;
-	adjNode = ( adjNode[0] == "?" ) ? adjNode.substr(1) : adjNode;
+	bool mandatory = ( adjNode[0] == '?' ) ?  true : false;
+	adjNode = ( adjNode[0] == '?' ) ? adjNode.substr(1) : adjNode;
 	featureGraph->addNode(adjNode);
-	featureGraph->setMandatory(mandatory);
+	featureGraph->setMandatory(adjNode, mandatory);
 
 }
+
+// list<string> AdvancedCoffeMaker::getFeatures(string descriptionLine)
+// {
+// 	list<string> features;
+// 	descriptionLine = descriptionLine.substr(1, descriptionLine.length() -2);
+// 	while( descriptionLine.find(",") != string::npos)		
+// 	{
+// 		features.push_back(subFeatures.substr(0, subFeatures.find(",")));
+// 		descriptionLine = subFeatures.substr(subFeatures.find(",") + 1);
+// 	}
+// 	features.push_back(descriptionLine);
+// 	return features;
+// }

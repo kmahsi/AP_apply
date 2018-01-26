@@ -3,21 +3,34 @@
 #include <list>
 #include <map>
 #include "advancedCoffeMaker.h"
+// #include "node.h"
 
+
+// define # and ## instead of using it inside code.
 
 using namespace std;
+string s = "gholi";
 
+class X
+{
+public:
+	X()
+	{
+		x = new Node(s);
+	}
+	~X()
+	{
+		cout << "hi";
+		delete x;
+	}
+
+	Node* x;
+};
 
 int main()
 {
-	
-	AdvancedCoffeMaker AMC;
-	// AMC.getInput();
-	std::map<std::string, int> nodes;
-	nodes["Ghasem"] = 3;
-	cout << nodes["Ghasem"] << endl;
-	cout << nodes["mahid"] << endl;
-	cout << "a\n";
+	X t;
+	// delete t.x;
 	
 }
 
