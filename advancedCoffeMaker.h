@@ -3,7 +3,9 @@
 class AdvancedCoffeMaker
 {
 public:
-	void getInput();
+	bool getInput();
+	AdvancedCoffeMaker();
+	~AdvancedCoffeMaker();
 private:
 	Graph* featureGraph;
 	nodeType findNodeType(std::string);

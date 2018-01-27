@@ -6,12 +6,13 @@
 
 using namespace std;
 
-void AdvancedCoffeMaker::getInput()
+bool AdvancedCoffeMaker::getInput()
 {
 	string featureModelLine, descriptionLine ;
 	list<string> features;
 	getline(cin, featureModelLine);
 	featureModelLine.erase(remove_if(featureModelLine.begin(), featureModelLine.end(), ::isspace), featureModelLine.end());
+	cout << featureModelLine.substr(0, featureModelLine.find("=")) << endl;
 	featureGraph->setRoot(featureModelLine.substr(0, featureModelLine.find("=")));
 	while (featureModelLine != "#")
 	{
@@ -26,6 +27,7 @@ void AdvancedCoffeMaker::getInput()
 		getline(cin, featureModelLine);
 		featureModelLine.erase(remove_if(featureModelLine.begin(), featureModelLine.end(), ::isspace), featureModelLine.end());
 	}
+	cout << "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" << endl;
 	getline(cin, descriptionLine);
 	while(descriptionLine != "##")
 	{
@@ -33,8 +35,11 @@ void AdvancedCoffeMaker::getInput()
 		features = getFeatures(descriptionLine);
 		getline(cin, descriptionLine);
 	}
+	cout << "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" << endl;
+	bool result = featureGraph->checkCoffeeBFS(features);
+	cout << "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" << endl;
+	if (result && features.empty()) return true; else return false;
 
-	featureGraph->checkCoffeeBFS(features);
 
 }
 
@@ -81,4 +86,16 @@ list<string> AdvancedCoffeMaker::getFeatures(string descriptionLine)
 	}
 	features.push_back(descriptionLine);
 	return features;
+}
+
+
+AdvancedCoffeMaker::AdvancedCoffeMaker()
+{
+	featureGraph = new Graph;
+	cout << "Zereshk" << endl;;
+}
+
+AdvancedCoffeMaker::~AdvancedCoffeMaker()
+{
+	delete featureGraph;
 }

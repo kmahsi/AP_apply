@@ -1,6 +1,5 @@
-
 #include "graph.h"
- 
+#include <algorithm>
 using namespace std;
 
 bool Graph::addNode(string nodeName)
@@ -58,7 +57,7 @@ void Graph::emptyGraph()
 	adjList.clear();
 }
 
-bool Graph::checkCoffeeBFS(list<string> features)
+bool Graph::checkCoffeeBFS(list<string> & features)
 {
 	std::unordered_map <std::string, Node*>::iterator nodesIterator = nodes.begin();
 	unordered_map <std::string, bool> visited;
@@ -69,9 +68,63 @@ bool Graph::checkCoffeeBFS(list<string> features)
 	list<string> queue;
 	visited[root] = true;
 	queue.push_back(root);
+	vector<string>::iterator adjListIterator;
+
+	while(!queue.empty())
+    {
+        string s = queue.front();
+        queue.pop_front();
+ 		bool visitNoneOfOrVertix = true;
+ 		int numberOfXorVertixes = 0;
+        for (adjListIterator = adjList[s]->begin(); adjListIterator != adjList[s]->end(); adjListIterator++)
+        {
+            if (!visited[*adjListIterator])
+            {
+            	visited[*adjListIterator] = true;
+            	list<string>::iterator it = std::find(features.begin(), features.end(), *adjListIterator);
+            	switch(nodes[s]->getType())
+        		{
+	        		case PLUS:
+	        			if(nodes[*adjListIterator]->getMandatory())
+	        			{
+	        				if (it == features.end()) return false; else features.remove(*adjListIterator);
+	                		queue.push_back(*adjListIterator);
+	        			}else
+	        			{
+	        				if (it != features.end()) 
+	        				{
+	        					features.remove(*adjListIterator);
+	        					queue.push_back(*adjListIterator);	
+	        				}
+	        			}
+	        			break;
+	        		case OR:
+	        			if (it != features.end()) 
+	        			{
+	        					visitNoneOfOrVertix = false;
+	        					features.remove(*adjListIterator);
+	        					queue.push_back(*adjListIterator);	
+	        			}
+	        			break;
+	        		case XOR:
+	        			if (it != features.end()) 
+	        			{
+	        					numberOfXorVertixes++;
+	        					features.remove(*adjListIterator);
+	        					queue.push_back(*adjListIterator);	
+	        			}
+	        			break;
+        		};	     
+            }
+        }
+        if(nodes[s]->getType() == OR && visitNoneOfOrVertix) return false;
+        if(nodes[s]->getType() == XOR && numberOfXorVertixes != 1) return false;
+    }
+    return true;
 }
 
 void Graph::setRoot(string _root)
 {
+	cout << "Zereshk"
 	root = _root;
 }

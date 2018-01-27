@@ -7,11 +7,18 @@
 #include <string>
 // #include <vector>
 #include <unordered_map>
+#include <list>
 enum nodeType { OR, XOR, AND, LEAF };
 
 using namespace std;
 int main()
 {
+	list<int>  features;
+	features.push_back(3);
+	features.push_back(4);
+	features.remove(3);
+	list<int>::iterator it = std::find(features.begin(), features.end(), 3);
+	cout << (it == features.end());
 	// cout << "Hi"<< endl;
 	// string pch = strtok ("asdfasdfdsaf asdf - fa- afs/+ asdf"," ,.-");
 	// while (pch != "")
@@ -43,9 +50,9 @@ int main()
 	// 	cout << it->first << "  " << it->second << endl;
 	// 	it++;
 	// }
-	vector<string> *a = new std::vector<string>;
-	a->push_back("G");
-	delete a;
+	// vector<string> *a = new std::vector<string>;
+	// a->push_back("G");
+	// delete a;
 	// std::vector<char> *v;
 	
 };

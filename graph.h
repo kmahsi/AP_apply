@@ -13,7 +13,7 @@ public:
 	bool setMandatory(std::string, bool);
 	bool addEdge(std::string, std::string);
 	void emptyGraph();
-	bool checkCoffeeBFS(std::list<std::string>);
+	bool checkCoffeeBFS(std::list<std::string> &);
 	void setRoot(std::string);
 private:
 	std::string root;
