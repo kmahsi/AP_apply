@@ -7,35 +7,38 @@
 
 using namespace std;
 
-bool AdvancedCoffeMaker::getInput()
+void AdvancedCoffeMaker::getInputAnProcess()
 {
 	string featureModelLine, descriptionLine ;
 	list<string> features;
 
-	getline(cin, featureModelLine);
 	featureModelLine.erase(remove_if(featureModelLine.begin(), featureModelLine.end(), ::isspace), featureModelLine.end());
 	featureGraph->setRoot(featureModelLine.substr(0, featureModelLine.find("=")));
-	while (featureModelLine != "#")
+	while(getline(cin, featureModelLine))
 	{
-						//erase all whitespaces in the input
-		string superFeature = featureModelLine.substr(0, featureModelLine.find("="));
-		string subFeatures = featureModelLine.substr(featureModelLine.find("=") + 1);
-		featureGraph->addNode(superFeature);
-		featureGraph->setType(superFeature, findNodeType(subFeatures));
-		addEdges(superFeature, subFeatures);
+		while (featureModelLine != "#")
+		{
+							//erase all whitespaces in the input
+			string superFeature = featureModelLine.substr(0, featureModelLine.find("="));
+			string subFeatures = featureModelLine.substr(featureModelLine.find("=") + 1);
+			featureGraph->addNode(superFeature);
+			featureGraph->setType(superFeature, findNodeType(subFeatures));
+			addEdges(superFeature, subFeatures);
 
-		getline(cin, featureModelLine);
-		featureModelLine.erase(remove_if(featureModelLine.begin(), featureModelLine.end(), ::isspace), featureModelLine.end());
-	}
-	getline(cin, descriptionLine);
-	while(descriptionLine != "##")
-	{
-		descriptionLine.erase(remove_if(descriptionLine.begin(), descriptionLine.end(), ::isspace), descriptionLine.end());
-		features = splitByDelimiter(descriptionLine.substr(1, descriptionLine.length() -2), ',');
+			getline(cin, featureModelLine);
+			featureModelLine.erase(remove_if(featureModelLine.begin(), featureModelLine.end(), ::isspace), featureModelLine.end());
+		}
 		getline(cin, descriptionLine);
+		while(descriptionLine != "##")
+		{
+			descriptionLine.erase(remove_if(descriptionLine.begin(), descriptionLine.end(), ::isspace), descriptionLine.end());
+			features = splitByDelimiter(descriptionLine.substr(1, descriptionLine.length() -2), ',');
+			getline(cin, descriptionLine);
+			bool result = featureGraph->checkCoffeeBFS(features);
+			if (result && features.empty()) output.push_back(VALID); else output.push_back(INVALID);
+		}
+		output.push_back("##");
 	}
-	bool result = featureGraph->checkCoffeeBFS(features);
-	if (result && features.empty()) return true; else return false;
 }
 
 nodeType AdvancedCoffeMaker::findNodeType( string subFeatures )
@@ -81,4 +84,9 @@ AdvancedCoffeMaker::AdvancedCoffeMaker()
 AdvancedCoffeMaker::~AdvancedCoffeMaker()
 {
 	delete featureGraph;
+}
+
+std::list<string> AdvancedCoffeMaker::getOutput()
+{
+	return output;
 }

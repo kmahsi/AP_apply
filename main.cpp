@@ -17,9 +17,12 @@ using namespace std;
 
 int main()
 {
-	AdvancedCoffeMaker a;
+	// AdvancedCoffeMaker a;
 
-	cout << a.getInput() << endl;
+	// cout << a.getInput() << endl;
+	string featureModelLine;
+	while (getline(cin, featureModelLine))
+		cout << featureModelLine << endl;
 		
 }
 
