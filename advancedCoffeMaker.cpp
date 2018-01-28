@@ -1,3 +1,4 @@
+#include "utils.cpp"
 #include "advancedCoffeMaker.h"
 #include <iostream>
 #include <algorithm>
@@ -59,7 +60,8 @@ bool AdvancedCoffeMaker::getInput()
 	while(descriptionLine != "##")
 	{
 		descriptionLine.erase(remove_if(descriptionLine.begin(), descriptionLine.end(), ::isspace), descriptionLine.end());
-		features = getFeatures(descriptionLine);
+		// features = getFeatures(descriptionLine);
+		features = splitByDelimiter(descriptionLine.substr(1, descriptionLine.length() -2), ',');
 		cout << "This is featuressssssssssssssssssssssssssssssssssssssssssssssssssssssssssss:   " << endl;
 		// printQ(features);
 		getline(cin, descriptionLine);
@@ -88,49 +90,45 @@ nodeType AdvancedCoffeMaker::findNodeType( string subFeatures )
 
 bool AdvancedCoffeMaker::addEdges(string superFeature, string subFeatures)
 {
-	string adjNode;
 	char delimiter = '+';
 	if (subFeatures.find('+') != string::npos) delimiter = '+';
 	if (subFeatures.find('|') != string::npos) delimiter = '|';
 	if (subFeatures.find('^') != string::npos) delimiter = '^';
+
+	list<string> splitedSubfeatures = splitByDelimiter(subFeatures, delimiter);
+	list<string>::iterator adjNodeIterator;
+	
 	cout << "                                       delimiter is :  " << delimiter << endl;
-	while( subFeatures.find(delimiter) != string::npos)		
+	for (adjNodeIterator = splitedSubfeatures.begin(); adjNodeIterator != splitedSubfeatures.end(); adjNodeIterator++)
 	{
-		adjNode = subFeatures.substr(0, subFeatures.find(delimiter));
-		cout << "            mandatory is " << adjNode << endl;
-		bool mandatory = ( adjNode[0] != '?' && delimiter == '+' ) ?  true : false;
+		*adjNodeIterator = subFeatures.substr(0, subFeatures.find(delimiter));
+		cout << "            mandatory is " << *adjNodeIterator << endl;
+		bool mandatory = ( (*adjNodeIterator)[0] != '?' && delimiter == '+' ) ?  true : false;
 		cout << "            mandatory is " << mandatory << endl;
-		adjNode = ( adjNode[0] == '?' ) ? adjNode.substr(1) : adjNode;
-		cout << "We are adding and adjNode to feature graph" << adjNode << endl;
-		featureGraph->addNode(adjNode);
-		featureGraph->addEdge(superFeature, adjNode);
-		featureGraph->setMandatory(adjNode, mandatory);
+		*adjNodeIterator = ( (*adjNodeIterator)[0] == '?' ) ? adjNodeIterator->substr(1) : *adjNodeIterator;
+		cout << "We are adding and *adjNodeIterator to feature graph" << *adjNodeIterator << endl;
+		featureGraph->addNode(*adjNodeIterator);
+		featureGraph->addEdge(superFeature, *adjNodeIterator);
+		featureGraph->setMandatory(*adjNodeIterator, mandatory);
 		subFeatures = subFeatures.substr(subFeatures.find(delimiter) + 1);
 	}
-	adjNode = subFeatures;
-	bool mandatory = ( adjNode[0] != '?' && delimiter == '+' ) ?  true : false;
-	adjNode = ( adjNode[0] == '?' ) ? adjNode.substr(1) : adjNode;
-	cout << "We are adding and adjNode to feature graph" << adjNode << endl;
-	featureGraph->addNode(adjNode);
-	featureGraph->addEdge(superFeature, adjNode);
-	featureGraph->setMandatory(adjNode, mandatory);
 
 }
 
-list<string> AdvancedCoffeMaker::getFeatures(string descriptionLine)
-{
-	list<string> features;
-	descriptionLine = descriptionLine.substr(1, descriptionLine.length() -2);
-	while( descriptionLine.find(",") != string::npos)		
-	{
-		cout << "This is descriptionLine :   " << descriptionLine.substr(0, descriptionLine.find(",")) << endl;
-		features.push_back(descriptionLine.substr(0, descriptionLine.find(",")));
-		descriptionLine = descriptionLine.substr(descriptionLine.find(",") + 1);
-	}
-	cout << "This is descriptionLine :   " << descriptionLine << endl;
-	features.push_back(descriptionLine);
-	return features;
-}
+// list<string> AdvancedCoffeMaker::getFeatures(string descriptionLine)
+// {
+// 	list<string> features;
+// 	descriptionLine = descriptionLine.substr(1, descriptionLine.length() -2);
+// 	while( descriptionLine.find(",") != string::npos)		
+// 	{
+// 		cout << "This is descriptionLine :   " << descriptionLine.substr(0, descriptionLine.find(",")) << endl;
+// 		features.push_back(descriptionLine.substr(0, descriptionLine.find(",")));
+// 		descriptionLine = descriptionLine.substr(descriptionLine.find(",") + 1);
+// 	}
+// 	cout << "This is descriptionLine :   " << descriptionLine << endl;
+// 	features.push_back(descriptionLine);
+// 	return features;
+// }
 
 
 AdvancedCoffeMaker::AdvancedCoffeMaker()
