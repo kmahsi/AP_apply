@@ -14,12 +14,26 @@
 
 using namespace std;
 
+void printQ(std::list<std::string> q)
+{
+	cout << "Baghali" << std::endl;
+	std::list<std::string>::iterator it = q.begin();
+	cout << std::endl << "printing Que" << std::endl;
+	while( it != q.end())	
+	{
+		cout << *it << endl;
+		it++;
+	}
+	cout << std::endl << "printing finished" << std::endl;;
+}
 
 int main()
 {
-	// AdvancedCoffeMaker a;
+	AdvancedCoffeMaker a;
 
-	// cout << a.getInput() << endl;
+	a.getInputAnProcess();
+	list<string> result = a.getOutput();
+	printQ(result);
 	string featureModelLine;
 	while (getline(cin, featureModelLine))
 		cout << featureModelLine << endl;
