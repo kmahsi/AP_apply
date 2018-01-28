@@ -2,5 +2,5 @@ CoffeeMachine = Brewer + CoffeeMaker + Creamer + ?TeaMaker
 CoffeeMaker = American | Espresso
 Creamer = Regular ^ Irish
 #
-{CoffeeMachine, Brewer, CoffeeMaker, Creamer, Regular, TeaMaker}
+{CoffeeMachine, Brewer, CoffeeMaker, American, Creamer, Regular}
 ##

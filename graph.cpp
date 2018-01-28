@@ -1,41 +1,13 @@
-
 #include "graph.h"
 #include <algorithm>
 using namespace std;
-
-
-void printQ(list<string> q)
-{
-	list<string>::iterator it = q.begin();
-	cout << endl << "                    We are pring que" << endl;
-	while( it != q.end())	
-	{
-		cout << *it << "    ";
-		it++;
-	}
-	cout << endl << "                   printing finished" << endl;;
-}
-// void printVector(std::vector<string> *q)
-// {
-// 	cout << "We are in that fuck" << endl;
-// 	vector<string>::iterator it = q->begin();
-// 	cout << endl << "                    We are pring vector" << endl;
-// 	while( it != q->end())	
-// 	{
-// 		cout << *it << "    ";
-// 		it++;
-// 	}
-// 	cout << endl << "                   printing finished" << endl;;	
-// }
 
 bool Graph::addNode(string nodeName)
 {
 	if (!nodes[nodeName])
 	{
 		adjList[nodeName] = new vector<string>;
-		cout << "The node has created " << nodeName << endl;
 		nodes[nodeName] = new Node(nodeName);
-		cout << nodes[nodeName]->getType() << endl;
 		return true;
 	}
 	return false;
@@ -88,7 +60,6 @@ void Graph::emptyGraph()
 
 bool Graph::checkCoffeeBFS(list<string> & features)
 {
-	cout << "Beggining of checkCoffeeBFS "<< endl << endl << endl << endl;
 	std::unordered_map <std::string, Node*>::iterator nodesIterator = nodes.begin();
 	unordered_map <std::string, bool> visited;
 	while(nodesIterator != nodes.end())
@@ -104,22 +75,16 @@ bool Graph::checkCoffeeBFS(list<string> & features)
 	vector<string>::iterator adjListIterator;
 	while(!queue.empty())
     {
-    	cout << "Q is not empty" << endl;
-    	printQ(queue);
         string s = queue.front();
         queue.pop_front();
  		bool visitNoneOfOrVertix = true;
  		int numberOfXorVertixes = 0;
- 		cout << "We ahve reached here and s is: " << s << endl;
- 		// printVector(adjList[s]);
         for (adjListIterator = adjList[s]->begin(); adjListIterator != adjList[s]->end(); adjListIterator++)
         {
-        	cout << "We ahve reached here and adj is : " << *adjListIterator << endl;
             if (!visited[*adjListIterator])
             {
             	visited[*adjListIterator] = true;
             	list<string>::iterator it = std::find(features.begin(), features.end(), *adjListIterator);
-            	cout << "The type is : " << nodes[s]->getType() << "   " << nodes[*adjListIterator]->getMandatory() << endl;
             	switch(nodes[s]->getType())
         		{
 	        		case PLUS:
@@ -129,13 +94,11 @@ bool Graph::checkCoffeeBFS(list<string> & features)
 	                		queue.push_back(*adjListIterator);
 	        			}else
 	        			{
-	        				cout << "We are in else"  << (it != features.end() ) << endl;
 	        				if (it != features.end()) 
 	        				{
 	        					features.remove(*adjListIterator);
 	        					queue.push_back(*adjListIterator);	
 	        				}
-	        				printQ(queue);
 	        			}
 	        			break;
 	        		case OR:
@@ -157,19 +120,14 @@ bool Graph::checkCoffeeBFS(list<string> & features)
         		};	     
             }
         }
-        cout << "We are before two ifs!" << endl;
         if(nodes[s]->getType() == OR && visitNoneOfOrVertix) return false;
-        printQ(features);
         if(nodes[s]->getType() == XOR && numberOfXorVertixes != 1) return false;
-        cout << "We are after two ifs!" << endl;
-        printQ(features); cout << "ggggggggggggggggggggggGG" << endl;
     }
     return true;
 }
 
 void Graph::setRoot(string _root)
 {
-	cout << "Zereshk";
 	root = _root;
 }
 
