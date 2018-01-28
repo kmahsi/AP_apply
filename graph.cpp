@@ -32,6 +32,7 @@ bool Graph::addNode(string nodeName)
 {
 	if (!nodes[nodeName])
 	{
+		adjList[nodeName] = new vector<string>;
 		cout << "The node has created " << nodeName << endl;
 		nodes[nodeName] = new Node(nodeName);
 		cout << nodes[nodeName]->getType() << endl;
@@ -158,6 +159,7 @@ bool Graph::checkCoffeeBFS(list<string> & features)
         }
         cout << "We are before two ifs!" << endl;
         if(nodes[s]->getType() == OR && visitNoneOfOrVertix) return false;
+        printQ(features);
         if(nodes[s]->getType() == XOR && numberOfXorVertixes != 1) return false;
         cout << "We are after two ifs!" << endl;
         printQ(features); cout << "ggggggggggggggggggggggGG" << endl;

@@ -1,5 +1,6 @@
-A=?B+?C
-B=D|E
+CoffeeMachine = Brewer + CoffeeMaker + Creamer + ?TeaMaker
+CoffeeMaker = American | Espresso
+Creamer = Regular ^ Irish
 #
-{A,B,C,D,E}
+{CoffeeMachine, Brewer, CoffeeMaker, Creamer, Regular, TeaMaker}
 ##
