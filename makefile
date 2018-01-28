@@ -1,3 +1,4 @@
+
 compile = g++ -std=c++11
 
 all: main.o advancedCoffeMaker.o graph.o node.o

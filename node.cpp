@@ -1,4 +1,5 @@
 
+
 #include "node.h"
 
 using namespace std;
@@ -26,4 +27,7 @@ bool Node::setMandatory(bool _mandatory)
 std::string Node::getName() { return name; }
 nodeType Node::getType() { return type; }
 bool Node::getMandatory() { return mandatory; }
+
+
+
 

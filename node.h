@@ -1,4 +1,5 @@
 
+
 #include<iostream>
 
 enum nodeType { OR, XOR, PLUS, LEAF };
@@ -18,3 +19,6 @@ private:
 	nodeType type;
 	bool mandatory;
 };
+
+
+

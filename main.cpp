@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <list>
 #include <map>
@@ -11,6 +10,7 @@
 // user ifndefine for #( compiler language )
 // rename check coffee bfs!
 // save number of vertices in graph(you should wright constructor i think)
+// remove duplicate code in 
 
 using namespace std;
 

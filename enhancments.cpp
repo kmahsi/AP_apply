@@ -5,7 +5,7 @@
 // #include <stdio.h>
 #include<list>
 #include <string>
-// #include <vector>
+#include <vector>
 #include <unordered_map>
 #include <list>
 enum nodeType { OR, XOR, AND, LEAF };
@@ -13,12 +13,25 @@ enum nodeType { OR, XOR, AND, LEAF };
 using namespace std;
 int main()
 {
-	list<int>  features;
-	features.push_back(3);
-	features.push_back(4);
-	features.remove(3);
-	list<int>::iterator it = std::find(features.begin(), features.end(), 3);
-	cout << (it == features.end());
+	// list<int>  features;
+	// features.push_back(3);
+	// features.push_back(4);
+	// features.remove(3);
+	// list<int>::iterator it = std::find(features.begin(), features.end(), 3);
+	// cout << (it == features.end());
+					// vector<string> * a;
+					// a = new vector<string>;
+					// a->push_back("3");
+					// a->push_back("2");
+					// std::vector<string>::iterator it = a->begin();
+					// cout << *(++it);
+	string s = "sdf,asfd af'adf + sdfsf";
+	s.find("")
+	// std::vector<string> v;
+	// v.push_back("34");
+	// v.push_back("4");
+	// std::vector<string>::iterator it = v.begin();
+	// cout << *it;
 	// cout << "Hi"<< endl;
 	// string pch = strtok ("asdfasdfdsaf asdf - fa- afs/+ asdf"," ,.-");
 	// while (pch != "")
